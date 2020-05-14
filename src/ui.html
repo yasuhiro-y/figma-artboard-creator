@@ -1,0 +1,90 @@
+<link
+  rel="stylesheet"
+  href="../node_modules/figma-plugin-ds/dist/figma-plugin-ds.css"
+/>
+
+<header>
+  <div class="onboarding-tip">
+    <div class="icon icon--settings"></div>
+    <div class="onboarding-tip__msg">
+      Create public spreadsheet and paste Spreadsheet ID.
+      <a href="">Read more</a>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="row">
+    <div class="input">
+      <div class="label">Spreadsheet ID</div>
+      <input
+        id="sheetId"
+        value="1sHT7mWJXjUz0RnuRO8oES56y_JUQAraa_x3loEZjeB8"
+        pattern="[a-zA-Z0-9-_]+"
+        required
+        class="input__field"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="input">
+      <div class="label">Wrap every:</div>
+      <input
+        type="text"
+        name="wrapEvery"
+        value="10"
+        id="wrapEvery"
+        required
+        class="input__field"
+      />
+    </div>
+  </div>
+  <div class="row switch-row">
+    <div class="switch">
+      <input class="switch__toggle" type="checkbox" id="renderArtboardName" />
+      <label class="switch__label" for="renderArtboardName"
+        >Render Artbord name</label
+      >
+    </div>
+  </div>
+  <div class="row"><p id="errorText"></p></div>
+  <div class="button-row">
+    <button class="button button--primary" id="create">Create</button>
+    <button class="button button--secondary" id="cancel">Cancel</button>
+  </div>
+</section>
+
+<style>
+  header {
+    padding: 12px 24px;
+    border-bottom: rgba(0, 0, 0, 10%) 1px solid;
+  }
+  .onboarding-tip__msg a {
+    color: #18a0fb;
+  }
+  section {
+    padding: 20px 24px;
+  }
+  input[type='text'] {
+    margin-left: 8px;
+  }
+  #errorText {
+    color: #f24822;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .button-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row;
+  }
+  #sheetId {
+    width: 100%;
+  }
+  .switch-row {
+    margin-top: 12px;
+  }
+  .button-row button {
+    margin-right: 12px;
+  }
+</style>

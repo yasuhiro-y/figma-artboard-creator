@@ -1,43 +1,53 @@
-figma.showUI(__html__)
+figma.showUI(__html__, { width: 428, height: 365, visible: true })
 figma.ui.onmessage = async (msg) => {
   await figma.loadFontAsync({ family: 'Roboto', style: 'Regular' })
   if (msg.type === 'create') {
     const nodes: SceneNode[] = []
 
     let name: string, width: number, height: number
-    let offsetX: number = 0,
-      offsetY: number = 0
+    let offsetX: number = 0
+    let offsetY: number = 0
     let maxHeight: number = 0
     let margin: number = 200
+
+    const wrapEvery: number = msg.wrapEvery
+    const renderArtboardName: boolean = msg.renderArtboardName
 
     const cells: any = msg.content
 
     const artboards: Artboard[] = shapeCellsToArtboards(cells)
 
     for (let i: number = 0; i < artboards.length; i++) {
-      console.log('<>')
-
       name = artboards[i].name
       width = artboards[i].width
       height = artboards[i].height
 
-      const artboard = createArtboard(name, width, height, offsetX, offsetY)
-      const artboardNameIndicator: GroupNode = createArtboardNameIndicator(name)
-      artboard.appendChild(artboardNameIndicator)
-      artboardNameIndicator.x = 30
-      artboardNameIndicator.y = 20
-      nodes.push(artboard)
-      nodes.push(artboardNameIndicator)
-      offsetX = offsetX + width
-      maxHeight = maxHeight <= height && height
+      const artboard: FrameNode = createArtboard(
+        name,
+        width,
+        height,
+        offsetX,
+        offsetY
+      )
 
-      if ((i + 1) % 5 === 0 && i != 0) {
-        offsetY = offsetY + maxHeight + margin
+      if (renderArtboardName) {
+        const artboardNameIndicator: GroupNode = createArtboardNameIndicator(
+          name
+        )
+        artboard.appendChild(artboardNameIndicator)
+        artboardNameIndicator.x = 30
+        artboardNameIndicator.y = 20
+        nodes.push(artboardNameIndicator)
+      }
+      maxHeight = maxHeight <= height ? height : maxHeight
+      offsetX = offsetX + width + margin
+
+      if ((i + 1) % wrapEvery === 0 && i != 0) {
         offsetX = 0
+        offsetY = offsetY + maxHeight + margin
         maxHeight = 0
       }
-
-      console.log('</>')
+      nodes.push(artboard)
     }
 
     figma.currentPage.selection = nodes
@@ -76,10 +86,13 @@ const shapeCellsToArtboards = (cells: any) => {
       height = Number(value)
       console.log(height)
     } else {
-      // 入力エラー
+      name = null
+      width = null
+      height = null
+      rowIndex++
     }
 
-    if ((i + 1) % 3 === 0 && i != 0) {
+    if ((i + 1) % 3 === 0 && i != 0 && name && width && height) {
       artboards.push({ name, width, height })
       name = null
       width = null
