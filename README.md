@@ -1,40 +1,42 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+Artboard Creator lets you generate multiple artboards from Google Spreadsheet.
 
-  https://www.figma.com/plugin-docs/setup/
+============
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+Instructions
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+Step1:
 
-  https://nodejs.org/en/download/
+Create new Google Spreadsheet and enter the artboard name, width, and height in this order, one line at a time.
+No header line is needed, the first line will look like this:
 
-Next, install TypeScript using the command:
+> Artboard1, 375, 812
 
-  npm install -g typescript
+Step2:
 
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
+At the top, select "File" > "Publish to the web" and click "Publish".
 
-  npm install --saveDev @figma/plugin-typings
+Notes: This is not the way to the share you normally do.
 
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
+Step3:
 
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
+Get Spreadsheet ID from URL.
 
-For more information, visit https://www.typescriptlang.org/
+[https://docs.google.com/spreadsheets/d/[HERE_IS_SPREADSHEET_ID]/edit#gid=0](https://docs.google.com/spreadsheets/d/1_Y4s4wUgLCeDwvZRRzs0LG_V-oCwiaL_jcIGgFQg8rg/edit#gid=0)
 
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
+Step4:
 
-We recommend writing TypeScript code using Visual Studio code:
+Launch this plugin .
+Paste Spreadsheet ID and click 'Create' button.
 
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-    then select "tsc: watch - tsconfig.json". You will have to do this again every time
-    you reopen Visual Studio Code.
+============
 
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+Options
+
+- Wrap every: You can specify how many artboard layouts to wrap. For example, if you specify 10, 10 artboards will be lined up.
+- Render artboard name: Generates a layer that displays the artboard name at the top of each artboard
+
+============
+
+Thanks:
+Figma Plugin DS
+https://github.com/thomas-lowry/figma-plugin-ds

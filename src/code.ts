@@ -72,9 +72,9 @@ const shapeCellsToArtboards = (cells: any) => {
   let height = 0
 
   for (let i = 0; i < cells.length; i++) {
-    value = String(cells[i]['gs$cell']['inputValue'])
     row = Number(cells[i]['gs$cell']['row'])
     col = Number(cells[i]['gs$cell']['col'])
+    value = String(cells[i]['gs$cell']['$t'])
 
     if (row === rowIndex && col === 1) {
       name = String(value)
