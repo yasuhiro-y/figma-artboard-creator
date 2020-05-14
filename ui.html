@@ -1,67 +1,32 @@
-<style>
-  body {
-    font: 12px sans-serif;
-    text-align: center;
-    margin: 20px;
-  }
-
-  button {
-    border-radius: 5px;
-    background: white;
-    color: black;
-    border: none;
-    padding: 8px 15px;
-    margin: 0 5px;
-    box-shadow: inset 0 0 0 1px black;
-    outline: none;
-  }
-
-  #create {
-    box-shadow: none;
-    background: #18A0FB;
-    color: white;
-  }
-
-  input {
-    border: #eee;
-    outline: none;
-    padding: 8px;
-    border-radius: 2px;
-  }
-
-  input:hover {
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-  }
-
-  button:focus {
-    box-shadow: inset 0 0 0 2px #18A0FB;
-  }
-
-  #create:focus {
-    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
-  }
-
-  input:focus {
-    box-shadow: inset 0 0 0 2px #18A0FB;
-  }
-</style>
 <h2>Artboard Creaator</h2>
-<p>sheetId:
-  <input id="sheetId" value="1sHT7mWJXjUz0RnuRO8oES56y_JUQAraa_x3loEZjeB8"
-  pattern="[a-zA-Z0-9-_]+"
-  >
-  </p>
+<p>
+  sheetId:
+  <input
+    id="sheetId"
+    value="1sHT7mWJXjUz0RnuRO8oES56y_JUQAraa_x3loEZjeB8"
+    pattern="[a-zA-Z0-9-_]+"
+  />
+
+  <label for="wrapEvery">Wrap every:</label>
+  <input type="number" name="wrapEvery" value="0" />
+  <label for="renderArtboardName">Render artbord name</label>
+  <input type="checkbox" name="wrapEvery" value="0" />
+</p>
 <button id="create">Create</button>
 <button id="cancel">Cancel</button>
+
 <script>
   //  get data and run scripts when pressed create
   document.getElementById('create').onclick = () => {
-    const textbox = document.getElementById('sheetId');
+    const textbox = document.getElementById('sheetId')
     const sheetId = textbox.value
-    getData(sheetId).then(data => {
+    getData(sheetId).then((data) => {
       data = JSON.parse(JSON.stringify(data))
-      data = data["feed"]["entry"]
-      parent.postMessage({ pluginMessage: { type: 'create', content: data } }, '*')
+      data = data['feed']['entry']
+      parent.postMessage(
+        { pluginMessage: { type: 'create', content: data } },
+        '*'
+      )
     })
   }
   // Close when pressed cancel
@@ -70,8 +35,11 @@
   }
   // Get data from Spreadsheet ID
   async function getData(id) {
-    const url = 'https://spreadsheets.google.com/feeds/cells/' + id + '/1/public/full?alt=json'
-    let data = await (await fetch(url)).json();
+    const url =
+      'https://spreadsheets.google.com/feeds/cells/' +
+      id +
+      '/1/public/full?alt=json'
+    let data = await (await fetch(url)).json()
     return data
   }
 </script>

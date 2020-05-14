@@ -10,6 +10,7 @@
   "license": "",
   "dependencies": {
     "@bitr/castable": "^1.0.3",
-    "@figma/plugin-typings": "^1.15.0"
+    "@figma/plugin-typings": "^1.15.0",
+    "figma-plugin-ds": "^0.1.3"
   }
 }
